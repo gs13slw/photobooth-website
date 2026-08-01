@@ -18,6 +18,7 @@ import {
   Layers,
 } from "lucide-react";
 import clsx from "clsx";
+import AvailabilityCalendar from "./AvailabilityCalendar";
 
 type EventType = "Wedding" | "Corporate" | "Private Party" | "Other";
 type PackageTier = "Gold" | "Silver" | "Platinum";
@@ -372,9 +373,18 @@ export default function BookingFlow() {
                   Almost there
                 </h3>
                 <p className="mt-1.5 text-sm text-muted">
-                  Share your details and we'll confirm availability.
+                  Pick your date and share your details — no call needed.
                 </p>
                 <div className="mt-7 flex flex-col gap-4">
+                  <div>
+                    <label className="mb-1.5 block text-sm font-medium text-cream">
+                      Event date
+                    </label>
+                    <AvailabilityCalendar
+                      selectedDate={contact.date}
+                      onSelect={(date) => setContact({ ...contact, date })}
+                    />
+                  </div>
                   <div>
                     <label className="mb-1.5 block text-sm font-medium text-cream">
                       Full name
@@ -401,19 +411,6 @@ export default function BookingFlow() {
                       }
                       placeholder="jamie@email.com"
                       className="w-full rounded-xl border border-cream/12 bg-ink px-4 py-3 text-sm text-cream placeholder:text-muted/50 outline-none transition-colors focus:border-flash"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-sm font-medium text-cream">
-                      Event date
-                    </label>
-                    <input
-                      type="date"
-                      value={contact.date}
-                      onChange={(e) =>
-                        setContact({ ...contact, date: e.target.value })
-                      }
-                      className="w-full rounded-xl border border-cream/12 bg-ink px-4 py-3 text-sm text-cream outline-none transition-colors focus:border-flash [color-scheme:dark]"
                     />
                   </div>
                 </div>

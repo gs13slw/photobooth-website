@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import { Lock, Plus, Copy, Check, Upload, Clock } from "lucide-react";
 import clsx from "clsx";
+import AdminAvailabilityManager from "@/components/AdminAvailabilityManager";
 
 interface GalleryEvent {
   code: string;
@@ -140,8 +141,16 @@ function AdminDashboard() {
     <main className="min-h-screen bg-ink px-6 py-16">
       <div className="container-x">
         <h1 className="font-display text-3xl font-semibold text-cream">
-          Event galleries
+          Admin dashboard
         </h1>
+
+        <div className="mt-8">
+          <AdminAvailabilityManager />
+        </div>
+
+        <h2 className="mt-14 font-display text-2xl font-semibold text-cream">
+          Event galleries
+        </h2>
         <p className="mt-2 max-w-xl text-muted">
           Create a gallery for each event, then upload the photos. Guests can
           view and download them at{" "}

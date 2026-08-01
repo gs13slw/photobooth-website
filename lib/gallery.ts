@@ -1,4 +1,5 @@
 import { Redis } from "@upstash/redis";
+import { blockDate } from "./availability";
 
 // Redis.fromEnv() reads whichever env var names your Redis integration
 // provides — works with both KV_REST_API_URL/TOKEN and
@@ -66,6 +67,9 @@ export async function createEvent(params: {
 
   await redis.set(`event:${code}`, event);
   await redis.zadd("events:index", { score: createdAt, member: code });
+
+  // Keep the public booking calendar in sync — this date is now taken.
+  await blockDate(params.eventDate);
 
   return event;
 }

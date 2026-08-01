@@ -44,13 +44,13 @@ export default function Header() {
               : "border-transparent bg-transparent"
           )}
         >
-          <a href="#top" className="flex items-center gap-2.5 group">
-            <span className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-cream/15 transition-transform duration-300 group-hover:scale-105">
+          <a href="#top" className="flex items-center gap-3 group">
+            <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-1 ring-cream/15 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/images/logo.png"
                 alt="Lasting Moments Booth, LLC"
                 fill
-                sizes="40px"
+                sizes="64px"
                 className="object-cover"
               />
             </span>

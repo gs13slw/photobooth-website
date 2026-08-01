@@ -18,8 +18,8 @@ export default function BookingSection() {
             Build your quote in under a minute.
           </h2>
           <p className="mt-5 text-balance text-lg text-muted">
-            Answer a few quick questions and get a live estimate. No account,
-            no obligation — just a starting point for your event.
+            Answer a few quick questions, pick your date, and get a live
+            estimate. No account, no phone call required.
           </p>
         </div>
 

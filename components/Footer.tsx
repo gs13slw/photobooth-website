@@ -21,13 +21,13 @@ export default function Footer() {
       <div className="container-x py-16">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <a href="#top" className="flex items-center gap-2.5">
-              <span className="relative h-9 w-9 overflow-hidden rounded-full ring-1 ring-cream/15">
+            <a href="#top" className="flex items-center gap-3">
+              <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-cream/15">
                 <Image
                   src="/images/logo.png"
                   alt="Lasting Moments Booth, LLC"
                   fill
-                  sizes="36px"
+                  sizes="56px"
                   className="object-cover"
                 />
               </span>
