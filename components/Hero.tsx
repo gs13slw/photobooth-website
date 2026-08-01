@@ -15,8 +15,7 @@ const STRIP_SHOTS = [
 export default function Hero() {
   return (
     <section
-      id="top"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-32 pb-20"
+      className="relative flex min-h-[90svh] items-center overflow-hidden py-20"
     >
       <AmbientGlow />
 
