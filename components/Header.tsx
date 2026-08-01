@@ -31,20 +31,16 @@ export default function Header() {
 
   return (
     <div id="top">
-      {/* Banner — scrolls away naturally with the page, full logo on display */}
-      <div className="relative border-b border-cream/10 bg-ink">
-        <div className="container-x flex items-center justify-center py-6 md:py-8">
-          <a href="#top" className="transition-transform duration-300 hover:scale-[1.02]">
-            <Image
-              src="/images/logo-banner.png"
-              alt="Lasting Moments Booth, LLC"
-              width={1672}
-              height={941}
-              priority
-              className="h-20 w-auto md:h-28"
-            />
-          </a>
-        </div>
+      {/* Banner — full-bleed, edge to edge, scrolls away naturally with the page */}
+      <div className="relative h-32 w-full overflow-hidden border-b border-cream/10 bg-ink md:h-48">
+        <Image
+          src="/images/logo-banner.png"
+          alt="Lasting Moments Booth, LLC"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
+        />
       </div>
 
       {/* Sticky nav — stays pinned once you scroll past the banner */}
