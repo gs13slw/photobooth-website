@@ -32,14 +32,14 @@ export default function Header() {
   return (
     <div id="top">
       {/* Banner — full-bleed, edge to edge, scrolls away naturally with the page */}
-      <div className="relative h-32 w-full overflow-hidden border-b border-cream/10 bg-ink md:h-48">
+      <div className="relative h-28 w-full overflow-hidden border-b border-cream/10 bg-ink md:h-40">
         <Image
           src="/images/logo-banner.png"
           alt="Lasting Moments Booth, LLC"
           fill
           sizes="100vw"
           priority
-          className="object-cover"
+          className="object-contain"
         />
       </div>
 
