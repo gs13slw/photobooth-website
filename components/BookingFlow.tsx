@@ -78,6 +78,8 @@ const STEPS = ["Event", "Package", "Add-ons", "Details"] as const;
 export default function BookingFlow() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [eventType, setEventType] = useState<EventType | null>(null);
   const [pkg, setPkg] = useState<PackageTier | null>(null);
   const [addOns, setAddOns] = useState<string[]>([]);
@@ -104,10 +106,37 @@ export default function BookingFlow() {
       prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]
     );
 
-  const handleSubmit = () => {
-    if (!canAdvance) return;
-    // In production, POST this payload to your booking API / CRM.
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    if (!canAdvance || submitting) return;
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const res = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventType,
+          packageTier: pkg,
+          addOns,
+          guestCount,
+          estimate,
+          name: contact.name,
+          email: contact.email,
+          eventDate: contact.date,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Submission failed");
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Something went wrong sending your request — please try again, or email us directly."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -442,14 +471,21 @@ export default function BookingFlow() {
               <ArrowRight size={16} />
             </button>
           ) : (
-            <button
-              onClick={handleSubmit}
-              disabled={!canAdvance}
-              className="btn-primary !py-3 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Submit inquiry
-              <Check size={16} />
-            </button>
+            <div className="flex flex-col items-end gap-2">
+              <button
+                onClick={handleSubmit}
+                disabled={!canAdvance || submitting}
+                className="btn-primary !py-3 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {submitting ? "Sending..." : "Submit inquiry"}
+                <Check size={16} />
+              </button>
+              {submitError && (
+                <p className="max-w-xs text-right text-xs text-blush">
+                  {submitError}
+                </p>
+              )}
+            </div>
           )}
         </div>
       </div>

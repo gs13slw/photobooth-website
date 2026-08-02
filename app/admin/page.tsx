@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import { Lock, Plus, Copy, Check, Upload, Clock } from "lucide-react";
 import clsx from "clsx";
 import AdminAvailabilityManager from "@/components/AdminAvailabilityManager";
+import AdminInquiries from "@/components/AdminInquiries";
 
 interface GalleryEvent {
   code: string;
@@ -143,6 +144,10 @@ function AdminDashboard() {
         <h1 className="font-display text-3xl font-semibold text-cream">
           Admin dashboard
         </h1>
+
+        <div className="mt-8">
+          <AdminInquiries />
+        </div>
 
         <div className="mt-8">
           <AdminAvailabilityManager />
