@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import clsx from "clsx";
+import SparkleBanner from "./SparkleBanner";
 
 const NAV_LINKS = [
   { label: "Experiences", href: "#services" },
@@ -31,16 +32,29 @@ export default function Header() {
 
   return (
     <div id="top">
-      {/* Banner — full-bleed, edge to edge, scrolls away naturally with the page */}
-      <div className="relative h-28 w-full overflow-hidden border-b border-cream/10 bg-ink md:h-40">
-        <Image
-          src="/images/logo-banner.png"
-          alt="Lasting Moments Booth, LLC"
-          fill
-          sizes="100vw"
-          priority
-          className="object-contain"
-        />
+      {/* Banner — animated sparkle field, full-bleed, logo mark centered on top */}
+      <div className="relative h-32 w-full overflow-hidden border-b border-cream/10 md:h-44">
+        <SparkleBanner />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="relative h-24 w-24 md:h-36 md:w-36"
+            style={{
+              WebkitMaskImage:
+                "radial-gradient(circle, black 55%, transparent 85%)",
+              maskImage:
+                "radial-gradient(circle, black 55%, transparent 85%)",
+            }}
+          >
+            <Image
+              src="/images/logo.png"
+              alt="Lasting Moments Booth, LLC"
+              fill
+              sizes="144px"
+              priority
+              className="object-cover"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Sticky nav — stays pinned once you scroll past the banner */}
