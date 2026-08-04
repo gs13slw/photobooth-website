@@ -8,12 +8,12 @@
   }
 
   body {
-    @apply bg-ink text-cream antialiased;
+    @apply bg-paper text-ink-text antialiased;
     font-feature-settings: "ss01" on, "cv01" on;
   }
 
   ::selection {
-    @apply bg-flash/30 text-cream;
+    @apply bg-flash/30 text-ink-text;
   }
 
   :focus-visible {
@@ -24,7 +24,9 @@
 
 @layer components {
   /* The signature motif: a perforated film-strip edge, used to frame
-     cards, section dividers, and the hero photo stack. */
+     cards, section dividers, and the hero photo stack. Dark-dot version —
+     used where the surrounding page area is still dark (e.g. the header's
+     mobile menu, which sits on the dark sparkle banner/nav). */
   .strip-edge {
     position: relative;
   }
@@ -55,6 +57,38 @@
     transform: rotate(180deg);
   }
 
+  /* Light-dot version of the same motif — used on the white main-site
+     sections, where the dots need to blend with a white page background. */
+  .strip-edge-light {
+    position: relative;
+  }
+
+  .strip-edge-light::before,
+  .strip-edge-light::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 1) 2.5px,
+      transparent 2.6px
+    );
+    background-size: 16px 10px;
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  .strip-edge-light::before {
+    top: -1px;
+  }
+
+  .strip-edge-light::after {
+    bottom: -1px;
+    transform: rotate(180deg);
+  }
+
   .eyebrow {
     @apply inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-flash-soft font-semibold;
   }
@@ -67,8 +101,14 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full bg-flash px-7 py-3.5 text-sm font-semibold text-ink shadow-glow transition-all duration-300 hover:bg-flash-soft hover:shadow-[0_0_55px_rgba(242,184,75,0.4)] active:scale-[0.98];
   }
 
+  /* Dark-context ghost button — used in the header/nav/admin, which stay dark. */
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 bg-cream/5 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-all duration-300 hover:border-cream/50 hover:bg-cream/10 active:scale-[0.98];
+  }
+
+  /* Light-context ghost button — used on the white main-site sections. */
+  .btn-secondary-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink-text/20 bg-ink-text/[0.03] px-7 py-3.5 text-sm font-semibold text-ink-text backdrop-blur-sm transition-all duration-300 hover:border-ink-text/40 hover:bg-ink-text/[0.06] active:scale-[0.98];
   }
 }
 

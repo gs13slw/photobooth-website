@@ -28,6 +28,16 @@ const config: Config = {
         cream: "#F7F3F0",
         muted: "#B8A9C4",
         line: "rgba(247,243,240,0.09)",
+        // Light-theme tokens — used on the main site sections (Hero down
+        // through Footer). The dark tokens above stay in use for the
+        // sparkle banner + sticky nav, which remain dark on purpose.
+        paper: {
+          DEFAULT: "#FFFFFF",
+          raised: "#FAF8F6",
+          inset: "#F2EEE9",
+        },
+        "ink-text": "#1B1523",
+        "muted-dark": "#6B5F73",
       },
       fontFamily: {
         display: ["var(--font-fraunces)", "serif"],
