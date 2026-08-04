@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Mail, Trash2, CheckCircle2, Circle } from "lucide-react";
+import { Mail, Trash2, CheckCircle2, Circle, FileText } from "lucide-react";
 import clsx from "clsx";
 
 interface Inquiry {
@@ -16,11 +16,15 @@ interface Inquiry {
   eventDate: string;
   createdAt: number;
   contacted: boolean;
+  contractSentAt?: number;
+  depositPaidAt?: number;
 }
 
 export default function AdminInquiries() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sendingId, setSendingId] = useState<string | null>(null);
+  const [sendError, setSendError] = useState<string | null>(null);
 
   const load = () => {
     fetch("/api/inquiries")
@@ -42,6 +46,21 @@ export default function AdminInquiries() {
     load();
   };
 
+  const sendContract = async (id: string) => {
+    setSendingId(id);
+    setSendError(null);
+    const res = await fetch(`/api/inquiries/${id}/send-contract`, {
+      method: "POST",
+    });
+    if (!res.ok) {
+      setSendError(
+        "Couldn't send the contract — check that RESEND_API_KEY is set up correctly."
+      );
+    }
+    setSendingId(null);
+    load();
+  };
+
   const remove = async (id: string) => {
     await fetch(`/api/inquiries/${id}`, { method: "DELETE" });
     load();
@@ -56,6 +75,11 @@ export default function AdminInquiries() {
         Every quote request submitted on the site shows up here. Mark one as
         contacted once you've followed up, or delete it once it's handled.
       </p>
+      {sendError && (
+        <p className="mt-3 rounded-xl bg-blush/10 px-4 py-2.5 text-sm text-blush">
+          {sendError}
+        </p>
+      )}
 
       <div className="mt-6 flex flex-col gap-3">
         {loading ? (
@@ -112,10 +136,36 @@ export default function AdminInquiries() {
                       day: "numeric",
                     })}
                   </span>
+                  {inquiry.contractSentAt && (
+                    <span className="text-flash-soft">
+                      &middot; Contract sent{" "}
+                      {new Date(inquiry.contractSentAt).toLocaleDateString(
+                        "en-US",
+                        { month: "short", day: "numeric" }
+                      )}
+                    </span>
+                  )}
+                  {inquiry.depositPaidAt && (
+                    <span className="font-semibold text-flash">
+                      &middot; Deposit paid ✓
+                    </span>
+                  )}
                 </p>
               </div>
 
               <div className="mt-3 flex items-center gap-2 sm:mt-0">
+                <button
+                  onClick={() => sendContract(inquiry.id)}
+                  disabled={sendingId === inquiry.id}
+                  className="btn-secondary !px-4 !py-2 !text-xs disabled:opacity-50"
+                >
+                  <FileText size={14} />
+                  {sendingId === inquiry.id
+                    ? "Sending..."
+                    : inquiry.contractSentAt
+                    ? "Resend contract"
+                    : "Send contract"}
+                </button>
                 <button
                   onClick={() => toggleContacted(inquiry)}
                   className="btn-secondary !px-4 !py-2 !text-xs"

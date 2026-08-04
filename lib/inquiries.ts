@@ -14,6 +14,8 @@ export interface Inquiry {
   eventDate: string;
   createdAt: number;
   contacted: boolean;
+  contractSentAt?: number;
+  depositPaidAt?: number;
 }
 
 export async function createInquiry(
@@ -43,6 +45,26 @@ export async function listInquiries(limit = 100): Promise<Inquiry[]> {
   );
 
   return inquiries.filter((i): i is Inquiry => i !== null);
+}
+
+export async function getInquiry(id: string): Promise<Inquiry | null> {
+  return redis.get<Inquiry>(`inquiry:${id}`);
+}
+
+export async function markContractSent(id: string): Promise<Inquiry | null> {
+  const inquiry = await redis.get<Inquiry>(`inquiry:${id}`);
+  if (!inquiry) return null;
+  inquiry.contractSentAt = Date.now();
+  await redis.set(`inquiry:${id}`, inquiry);
+  return inquiry;
+}
+
+export async function markDepositPaid(id: string): Promise<Inquiry | null> {
+  const inquiry = await redis.get<Inquiry>(`inquiry:${id}`);
+  if (!inquiry) return null;
+  inquiry.depositPaidAt = Date.now();
+  await redis.set(`inquiry:${id}`, inquiry);
+  return inquiry;
 }
 
 export async function markContacted(
