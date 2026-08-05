@@ -51,7 +51,7 @@ export default function FAQ() {
                 >
                   <span className="font-medium text-cream">{item.q}</span>
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-flash-soft transition-transform duration-300 ${
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-raised text-flash-soft transition-transform duration-300 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   >

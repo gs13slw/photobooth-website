@@ -61,8 +61,8 @@ export default function AmbientGlow() {
         />
       ))}
 
-      {/* Vignette to ground everything in the base color */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(27,21,35,0.15)_0%,rgba(27,21,35,0.7)_55%,rgba(27,21,35,1)_100%)]" />
+      {/* Subtle warm vignette to soften the edges on the white background */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(242,238,233,0)_0%,rgba(242,238,233,0)_55%,rgba(242,238,233,0.7)_100%)]" />
     </div>
   );
 }

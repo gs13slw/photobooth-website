@@ -123,7 +123,7 @@ export default function Services() {
                 "rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300",
                 active === cat
                   ? "border-flash bg-flash text-ink"
-                  : "border-cream/12 bg-transparent text-muted hover:border-cream/30 hover:text-cream"
+                  : "border-cream/15 bg-transparent text-muted hover:border-cream/30 hover:text-cream"
               )}
             >
               {cat}
@@ -155,7 +155,7 @@ export default function Services() {
                   />
 
                   <div className="relative flex items-start justify-between">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-flash-soft transition-colors duration-300 group-hover:bg-flash group-hover:text-ink">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-raised text-flash-soft transition-colors duration-300 group-hover:bg-flash group-hover:text-ink">
                       <Icon size={20} />
                     </span>
                     <span className="rounded-full border border-cream/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-muted">

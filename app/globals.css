@@ -8,12 +8,12 @@
   }
 
   body {
-    @apply bg-paper text-ink-text antialiased;
+    @apply bg-ink text-cream antialiased;
     font-feature-settings: "ss01" on, "cv01" on;
   }
 
   ::selection {
-    @apply bg-flash/30 text-ink-text;
+    @apply bg-flash/30 text-cream;
   }
 
   :focus-visible {
