@@ -29,6 +29,7 @@ const config: Config = {
         muted: "#B8A9C4",
         line: "rgba(247,243,240,0.09)",
         "ink-text": "#1B1523",
+        "muted-dark": "#57534E",
         paper: {
           DEFAULT: "#FFFFFF",
           raised: "#FAF7F2",
