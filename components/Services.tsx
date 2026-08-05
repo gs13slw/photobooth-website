@@ -96,8 +96,20 @@ export default function Services() {
   }, [active]);
 
   return (
-    <section id="services" className="relative py-28">
-      <div className="container-x">
+    <section
+      id="services"
+      className="relative overflow-hidden border-y border-flash/20 bg-zinc-700 py-28"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-flash-glow opacity-40"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-flash-glow opacity-30"
+      />
+
+      <div className="container-x relative">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow justify-center">
             <Sparkles size={13} />
