@@ -17,7 +17,10 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = {metadataBase: new URL("https://lastingmomentsbooth.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Lasting Moments Booth, LLC | Photo Booth Rentals in Atlanta, GA",
   description:
     "Lasting Moments, Captured Forever. Premium photo booth experiences for weddings, birthdays, family reunions, and corporate events. Serving Atlanta & surrounding areas.",
@@ -33,7 +36,14 @@ export const metadata: Metadata = {
       "Premium photo booth experiences for weddings, birthdays, family reunions, and corporate events. Serving Atlanta & surrounding areas.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lasting Moments Booth, LLC",
+    description:
+      "Premium photo booth experiences for weddings, birthdays, family reunions, and corporate events. Serving Atlanta & surrounding areas.",
+  },
 };
+    
 
 export default function RootLayout({
   children,
