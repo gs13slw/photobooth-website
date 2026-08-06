@@ -12,7 +12,7 @@ function WordmarkItem() {
         Moments
       </span>
       <span className="italic text-blush-soft drop-shadow-[0_0_12px_rgba(232,135,158,0.55)]">
-        Photobooth, LLC
+        Booth, LLC
       </span>
     </span>
   );
