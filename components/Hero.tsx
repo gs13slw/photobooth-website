@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, PlayCircle, Sparkles } from "lucide-react";
 import AmbientGlow from "./AmbientGlow";
-import HeroSlideshow from "./HeroSlideshow";
+import HeroVideo from "./HeroVideo";
 
 export default function Hero() {
   return (
@@ -78,7 +78,7 @@ export default function Hero() {
           className="relative mx-auto w-full max-w-[280px] animate-drift lg:mx-0 lg:ml-auto"
         >
           <div className="strip-edge-light rounded-2xl border border-ink-text/10 bg-paper-raised p-3 shadow-strip">
-            <HeroSlideshow />
+            <HeroVideo />
             <p className="mt-3 text-center font-display text-sm italic text-muted-dark">
               Lasting Moments Booth, LLC
             </p>
