@@ -63,7 +63,7 @@ export default function AvailabilityCalendar({
   const canGoBack = new Date(year, month, 1) > new Date(today.getFullYear(), today.getMonth(), 1);
 
   return (
-    <div className="rounded-2xl border border-black/15 bg-flash p-4">
+    <div className="rounded-2xl border border-black/15 bg-white p-4">
       <div className="flex items-center justify-between px-1 pb-3">
         <button
           type="button"
