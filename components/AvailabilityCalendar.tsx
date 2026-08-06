@@ -63,34 +63,34 @@ export default function AvailabilityCalendar({
   const canGoBack = new Date(year, month, 1) > new Date(today.getFullYear(), today.getMonth(), 1);
 
   return (
-    <div className="rounded-2xl border border-cream/10 bg-ink p-4">
+    <div className="rounded-2xl border border-black/15 bg-flash p-4">
       <div className="flex items-center justify-between px-1 pb-3">
         <button
           type="button"
           onClick={() => canGoBack && setViewDate(new Date(year, month - 1, 1))}
           disabled={!canGoBack}
           className={clsx(
-            "flex h-8 w-8 items-center justify-center rounded-full border border-cream/12 text-muted transition-colors",
-            canGoBack ? "hover:border-flash/40 hover:text-flash-soft" : "opacity-30"
+            "flex h-8 w-8 items-center justify-center rounded-full border border-black/20 text-black/70 transition-colors",
+            canGoBack ? "hover:border-black/40 hover:text-black" : "opacity-30"
           )}
           aria-label="Previous month"
         >
           <ChevronLeft size={15} />
         </button>
-        <p className="font-display text-sm font-semibold text-cream">
+        <p className="font-display text-sm font-semibold text-black">
           {MONTH_NAMES[month]} {year}
         </p>
         <button
           type="button"
           onClick={() => setViewDate(new Date(year, month + 1, 1))}
-          className="flex h-8 w-8 items-center justify-center rounded-full border border-cream/12 text-muted transition-colors hover:border-flash/40 hover:text-flash-soft"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-black/20 text-black/70 transition-colors hover:border-black/40 hover:text-black"
           aria-label="Next month"
         >
           <ChevronRight size={15} />
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1 px-1 pb-1 text-center text-[11px] font-medium text-muted/70">
+      <div className="grid grid-cols-7 gap-1 px-1 pb-1 text-center text-[11px] font-medium text-black/60">
         {WEEKDAY_LABELS.map((w, i) => (
           <div key={i}>{w}</div>
         ))}
@@ -114,10 +114,10 @@ export default function AvailabilityCalendar({
               title={booked ? "Already booked" : undefined}
               className={clsx(
                 "flex aspect-square items-center justify-center rounded-lg text-xs transition-all",
-                isSelected && "bg-flash text-ink font-semibold",
-                !isSelected && !disabled && "text-cream hover:bg-cream/10",
-                !isSelected && booked && "text-muted/30 line-through cursor-not-allowed",
-                !isSelected && past && !booked && "text-muted/20 cursor-not-allowed"
+                isSelected && "bg-black text-flash font-semibold",
+                !isSelected && !disabled && "text-black hover:bg-black/10",
+                !isSelected && booked && "text-black/30 line-through cursor-not-allowed",
+                !isSelected && past && !booked && "text-black/20 cursor-not-allowed"
               )}
             >
               {date.getDate()}
@@ -126,12 +126,12 @@ export default function AvailabilityCalendar({
         })}
       </div>
 
-      <div className="mt-4 flex items-center gap-4 border-t border-cream/10 px-1 pt-3 text-[11px] text-muted">
+      <div className="mt-4 flex items-center gap-4 border-t border-black/15 px-1 pt-3 text-[11px] text-black/70">
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-flash" /> Selected
+          <span className="h-2.5 w-2.5 rounded-full bg-black" /> Selected
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-muted/30 line-through" />
+          <span className="h-2.5 w-2.5 rounded-full bg-black/30 line-through" />
           Unavailable
         </span>
       </div>

@@ -31,16 +31,16 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-28">
+    <section id="faq" className="relative bg-[#8A6D1E] py-28">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow justify-center">FAQ</span>
-          <h2 className="mt-5 text-balance font-display text-4xl font-semibold tracking-tight text-cream sm:text-5xl">
+          <span className="eyebrow justify-center text-black">FAQ</span>
+          <h2 className="mt-5 text-balance font-display text-4xl font-semibold tracking-tight text-black sm:text-5xl">
             Questions, answered.
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 max-w-2xl divide-y divide-cream/10 rounded-3xl border border-cream/10 bg-surface">
+        <div className="mx-auto mt-12 max-w-2xl divide-y divide-black/15 rounded-3xl border border-black/15 bg-flash">
           {FAQS.map((item, i) => {
             const isOpen = openIndex === i;
             return (
@@ -49,9 +49,9 @@ export default function FAQ() {
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   className="flex w-full items-center justify-between gap-4 py-6 text-left"
                 >
-                  <span className="font-medium text-cream">{item.q}</span>
+                  <span className="font-medium text-black">{item.q}</span>
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-raised text-flash-soft transition-transform duration-300 ${
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black/10 text-black transition-transform duration-300 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   >
@@ -67,7 +67,7 @@ export default function FAQ() {
                       transition={{ duration: 0.3, ease: "easeOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-sm leading-relaxed text-muted">
+                      <p className="pb-6 text-sm leading-relaxed text-black/80">
                         {item.a}
                       </p>
                     </motion.div>

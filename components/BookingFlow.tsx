@@ -141,27 +141,27 @@ export default function BookingFlow() {
 
   if (submitted) {
     return (
-      <div className="strip-edge mx-auto max-w-xl rounded-3xl border border-cream/10 bg-surface p-10 text-center shadow-strip">
+      <div className="strip-edge mx-auto max-w-xl rounded-3xl border border-black/15 bg-flash p-10 text-center shadow-strip">
         <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-flash text-ink">
           <Check size={28} strokeWidth={2.5} />
         </span>
-        <h3 className="mt-6 font-display text-2xl font-semibold text-cream">
+        <h3 className="mt-6 font-display text-2xl font-semibold text-black">
           Got it, {contact.name.split(" ")[0]}!
         </h3>
-        <p className="mt-3 text-muted">
+        <p className="mt-3 text-black/70">
           Your inquiry for a {eventType?.toLowerCase()} on{" "}
-          <span className="text-cream">{contact.date}</span> is in. We'll
-          follow up at <span className="text-cream">{contact.email}</span>{" "}
+          <span className="text-black">{contact.date}</span> is in. We'll
+          follow up at <span className="text-black">{contact.email}</span>{" "}
           within one business day with availability and a formal quote.
         </p>
         <div className="mt-6 rounded-2xl bg-ink px-6 py-4">
-          <p className="text-xs uppercase tracking-wide text-muted">
+          <p className="text-xs uppercase tracking-wide text-black/70">
             Estimated total
           </p>
           <p className="font-display text-3xl font-semibold text-flash-soft">
             ${estimate.toLocaleString()}
           </p>
-          <p className="mt-1 text-xs text-muted">
+          <p className="mt-1 text-xs text-black/70">
             Plus travel fee if outside our standard service area (varies by
             location — confirmed in your formal quote).
           </p>
@@ -175,7 +175,7 @@ export default function BookingFlow() {
             setAddOns([]);
             setContact({ name: "", email: "", date: "" });
           }}
-          className="btn-secondary mt-7"
+          className="btn-secondary !border-black/30 !bg-black/10 !text-black hover:!border-black/50 hover:!bg-black/15 mt-7"
         >
           Start a new inquiry
         </button>
@@ -186,7 +186,7 @@ export default function BookingFlow() {
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
       {/* Wizard */}
-      <div className="strip-edge rounded-3xl border border-cream/10 bg-surface p-6 shadow-strip sm:p-9">
+      <div className="strip-edge rounded-3xl border border-black/15 bg-flash p-6 shadow-strip sm:p-9">
         {/* Progress */}
         <div className="mb-9 flex items-center gap-3">
           {STEPS.map((label, i) => (
@@ -196,15 +196,15 @@ export default function BookingFlow() {
                   <span
                     className={clsx(
                       "font-medium",
-                      i <= step ? "text-cream" : "text-muted/60"
+                      i <= step ? "text-black" : "text-black/40"
                     )}
                   >
                     {label}
                   </span>
                 </div>
-                <div className="h-1 w-full overflow-hidden rounded-full bg-cream/10">
+                <div className="h-1 w-full overflow-hidden rounded-full bg-black/15">
                   <motion.div
-                    className="h-full bg-flash"
+                    className="h-full bg-black"
                     initial={false}
                     animate={{ width: i <= step ? "100%" : "0%" }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
@@ -225,10 +225,10 @@ export default function BookingFlow() {
           >
             {step === 0 && (
               <div>
-                <h3 className="font-display text-2xl font-semibold text-cream">
+                <h3 className="font-display text-2xl font-semibold text-black">
                   What are we celebrating?
                 </h3>
-                <p className="mt-1.5 text-sm text-muted">
+                <p className="mt-1.5 text-sm text-black/70">
                   This helps us tailor package recommendations for you.
                 </p>
                 <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -242,8 +242,8 @@ export default function BookingFlow() {
                         className={clsx(
                           "flex items-start gap-3.5 rounded-2xl border p-4 text-left transition-all duration-200",
                           isActive
-                            ? "border-flash bg-flash/10"
-                            : "border-cream/10 bg-ink hover:border-cream/25"
+                            ? "border-flash bg-black/10"
+                            : "border-black/15 bg-black/10 hover:border-black/30"
                         )}
                       >
                         <span
@@ -251,16 +251,16 @@ export default function BookingFlow() {
                             "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                             isActive
                               ? "bg-flash text-ink"
-                              : "bg-surface-raised text-flash-soft"
+                              : "bg-black/10 text-black/60"
                           )}
                         >
                           <Icon size={17} />
                         </span>
                         <span>
-                          <span className="block font-medium text-cream">
+                          <span className="block font-medium text-black">
                             {type.id}
                           </span>
-                          <span className="text-xs text-muted">
+                          <span className="text-xs text-black/70">
                             {type.blurb}
                           </span>
                         </span>
@@ -273,10 +273,10 @@ export default function BookingFlow() {
 
             {step === 1 && (
               <div>
-                <h3 className="font-display text-2xl font-semibold text-cream">
+                <h3 className="font-display text-2xl font-semibold text-black">
                   Choose your package
                 </h3>
-                <p className="mt-1.5 text-sm text-muted">
+                <p className="mt-1.5 text-sm text-black/70">
                   Every package includes unlimited sessions, props &amp;
                   backdrops, and a friendly on-site attendant.
                 </p>
@@ -291,8 +291,8 @@ export default function BookingFlow() {
                         className={clsx(
                           "flex items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-all duration-200",
                           isActive
-                            ? "border-flash bg-flash/10"
-                            : "border-cream/10 bg-ink hover:border-cream/25"
+                            ? "border-flash bg-black/10"
+                            : "border-black/15 bg-black/10 hover:border-black/30"
                         )}
                       >
                         <span className="flex items-center gap-3.5">
@@ -301,22 +301,22 @@ export default function BookingFlow() {
                               "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                               isActive
                                 ? "bg-flash text-ink"
-                                : "bg-surface-raised text-flash-soft"
+                                : "bg-black/10 text-black/60"
                             )}
                           >
                             <Icon size={17} />
                           </span>
                           <span>
-                            <span className="block font-medium text-cream">
+                            <span className="block font-medium text-black">
                               {p.id} &middot; {p.hours}{" "}
                               {p.hours === 1 ? "hour" : "hours"}
                             </span>
-                            <span className="text-xs text-muted">
+                            <span className="text-xs text-black/70">
                               {p.blurb}
                             </span>
                           </span>
                         </span>
-                        <span className="whitespace-nowrap font-display text-lg font-semibold text-flash-soft">
+                        <span className="whitespace-nowrap font-display text-lg font-semibold text-black">
                           ${p.price}
                         </span>
                       </button>
@@ -328,10 +328,10 @@ export default function BookingFlow() {
 
             {step === 2 && (
               <div>
-                <h3 className="font-display text-2xl font-semibold text-cream">
+                <h3 className="font-display text-2xl font-semibold text-black">
                   Sweeten the package
                 </h3>
-                <p className="mt-1.5 text-sm text-muted">
+                <p className="mt-1.5 text-sm text-black/70">
                   Optional add-ons — select as many as you'd like.
                 </p>
                 <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -345,8 +345,8 @@ export default function BookingFlow() {
                         className={clsx(
                           "flex items-center justify-between gap-3 rounded-2xl border p-4 text-left transition-all duration-200",
                           isActive
-                            ? "border-flash bg-flash/10"
-                            : "border-cream/10 bg-ink hover:border-cream/25"
+                            ? "border-flash bg-black/10"
+                            : "border-black/15 bg-black/10 hover:border-black/30"
                         )}
                       >
                         <span className="flex items-center gap-3">
@@ -355,16 +355,16 @@ export default function BookingFlow() {
                               "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
                               isActive
                                 ? "bg-flash text-ink"
-                                : "bg-surface-raised text-flash-soft"
+                                : "bg-black/10 text-black/60"
                             )}
                           >
                             <Icon size={15} />
                           </span>
-                          <span className="text-sm font-medium text-cream">
+                          <span className="text-sm font-medium text-black">
                             {addOn.label}
                           </span>
                         </span>
-                        <span className="text-sm font-semibold text-muted">
+                        <span className="text-sm font-semibold text-black/70">
                           +${addOn.price}
                         </span>
                       </button>
@@ -373,7 +373,7 @@ export default function BookingFlow() {
                 </div>
 
                 <div className="mt-6">
-                  <label className="mb-2 block text-sm font-medium text-cream">
+                  <label className="mb-2 block text-sm font-medium text-black">
                     Estimated guest count
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -384,8 +384,8 @@ export default function BookingFlow() {
                         className={clsx(
                           "rounded-full border px-4 py-2 text-xs font-medium transition-all",
                           guestCount === g
-                            ? "border-flash bg-flash text-ink"
-                            : "border-cream/12 text-muted hover:border-cream/30"
+                            ? "border-black bg-black text-flash"
+                            : "border-black/25 text-black hover:border-black/50"
                         )}
                       >
                         {g}
@@ -398,15 +398,15 @@ export default function BookingFlow() {
 
             {step === 3 && (
               <div>
-                <h3 className="font-display text-2xl font-semibold text-cream">
+                <h3 className="font-display text-2xl font-semibold text-black">
                   Almost there
                 </h3>
-                <p className="mt-1.5 text-sm text-muted">
+                <p className="mt-1.5 text-sm text-black/70">
                   Pick your date and share your details — no call needed.
                 </p>
                 <div className="mt-7 flex flex-col gap-4">
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-cream">
+                    <label className="mb-1.5 block text-sm font-medium text-black">
                       Event date
                     </label>
                     <AvailabilityCalendar
@@ -415,7 +415,7 @@ export default function BookingFlow() {
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-cream">
+                    <label className="mb-1.5 block text-sm font-medium text-black">
                       Full name
                     </label>
                     <input
@@ -425,11 +425,11 @@ export default function BookingFlow() {
                         setContact({ ...contact, name: e.target.value })
                       }
                       placeholder="Jamie Rivera"
-                      className="w-full rounded-xl border border-cream/12 bg-ink px-4 py-3 text-sm text-cream placeholder:text-muted/50 outline-none transition-colors focus:border-flash"
+                      className="w-full rounded-xl border border-black/15 bg-black/10 px-4 py-3 text-sm text-black placeholder:text-black/40 outline-none transition-colors focus:border-flash"
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-cream">
+                    <label className="mb-1.5 block text-sm font-medium text-black">
                       Email address
                     </label>
                     <input
@@ -439,7 +439,7 @@ export default function BookingFlow() {
                         setContact({ ...contact, email: e.target.value })
                       }
                       placeholder="jamie@email.com"
-                      className="w-full rounded-xl border border-cream/12 bg-ink px-4 py-3 text-sm text-cream placeholder:text-muted/50 outline-none transition-colors focus:border-flash"
+                      className="w-full rounded-xl border border-black/15 bg-black/10 px-4 py-3 text-sm text-black placeholder:text-black/40 outline-none transition-colors focus:border-flash"
                     />
                   </div>
                 </div>
@@ -449,12 +449,12 @@ export default function BookingFlow() {
         </AnimatePresence>
 
         {/* Controls */}
-        <div className="mt-9 flex items-center justify-between border-t border-cream/10 pt-6">
+        <div className="mt-9 flex items-center justify-between border-t border-black/15 pt-6">
           <button
             onClick={() => setStep((s) => Math.max(0, s - 1))}
             className={clsx(
-              "flex items-center gap-1.5 text-sm font-medium text-muted transition-opacity",
-              step === 0 ? "pointer-events-none opacity-0" : "hover:text-cream"
+              "flex items-center gap-1.5 text-sm font-medium text-black/70 transition-opacity",
+              step === 0 ? "pointer-events-none opacity-0" : "hover:text-black"
             )}
           >
             <ArrowLeft size={15} />
@@ -465,7 +465,7 @@ export default function BookingFlow() {
             <button
               onClick={() => canAdvance && setStep((s) => s + 1)}
               disabled={!canAdvance}
-              className="btn-primary !py-3 disabled:cursor-not-allowed disabled:opacity-40"
+              className="btn-primary !bg-black !text-flash hover:!bg-black/85 !py-3 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Continue
               <ArrowRight size={16} />
@@ -475,13 +475,13 @@ export default function BookingFlow() {
               <button
                 onClick={handleSubmit}
                 disabled={!canAdvance || submitting}
-                className="btn-primary !py-3 disabled:cursor-not-allowed disabled:opacity-40"
+                className="btn-primary !bg-black !text-flash hover:!bg-black/85 !py-3 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {submitting ? "Sending..." : "Submit inquiry"}
                 <Check size={16} />
               </button>
               {submitError && (
-                <p className="max-w-xs text-right text-xs text-blush">
+                <p className="max-w-xs text-right text-xs text-red-900">
                   {submitError}
                 </p>
               )}
@@ -491,14 +491,14 @@ export default function BookingFlow() {
       </div>
 
       {/* Live summary */}
-      <div className="h-fit rounded-3xl border border-cream/10 bg-ink p-7 lg:sticky lg:top-28">
-        <p className="eyebrow">Your estimate</p>
-        <p className="mt-3 font-display text-4xl font-semibold text-flash-soft">
+      <div className="h-fit rounded-3xl border border-black/15 bg-flash p-7 lg:sticky lg:top-28">
+        <p className="eyebrow text-black">Your estimate</p>
+        <p className="mt-3 font-display text-4xl font-semibold text-black">
           ${estimate.toLocaleString()}
-          <span className="text-base font-normal text-muted"> / event</span>
+          <span className="text-base font-normal text-black/70"> / event</span>
         </p>
 
-        <div className="mt-6 flex flex-col divide-y divide-cream/8">
+        <div className="mt-6 flex flex-col divide-y divide-black/15">
           <SummaryRow label="Event type" value={eventType ?? "—"} />
           <SummaryRow
             label="Package"
@@ -522,7 +522,7 @@ export default function BookingFlow() {
           />
         </div>
 
-        <p className="mt-6 text-xs leading-relaxed text-muted">
+        <p className="mt-6 text-xs leading-relaxed text-black/70">
           This is a starting estimate and doesn't include travel fees, which
           vary by location and are confirmed once we know your venue.
         </p>
@@ -534,8 +534,8 @@ export default function BookingFlow() {
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between py-3 text-sm">
-      <span className="text-muted">{label}</span>
-      <span className="font-medium text-cream">{value}</span>
+      <span className="text-black/70">{label}</span>
+      <span className="font-medium text-black">{value}</span>
     </div>
   );
 }

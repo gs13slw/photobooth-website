@@ -2,70 +2,85 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Star } from "lucide-react";
 
 // gallery-1 and gallery-2 are real event photos. Replace gallery-3 through
 // gallery-6 with real photos as they come in — drop them into
-// /public/images/ using these filenames and update the labels/captions below.
+// /public/images/ using these filenames and update the labels below.
+//
+// ⚠️ The reviews below (name + quote) are PLACEHOLDER TEXT, not real
+// customer feedback. Swap these for genuine reviews as soon as you have
+// them — using fabricated testimonials on a live business site can run
+// into FTC/advertising-truthfulness issues in the US.
 const GALLERY_ITEMS = [
   {
     src: "/images/gallery-1.jpg",
     label: "Celebration Night",
-    caption: "Non-stop laughs and photo strips all night long.",
+    name: "Jasmine R.",
+    quote: "Everyone was still talking about the photo booth days later!",
   },
   {
     src: "/images/gallery-2.jpg",
     label: "Wedding Reception",
-    caption: "A favorite reception add-on, loved by guests of all ages.",
+    name: "Marcus T.",
+    quote: "Such a fun addition to our reception — worth every penny.",
   },
   {
     src: "/images/gallery-3.jpg",
     label: "Garden Celebration",
-    caption: "Soft outdoor light made every print feel extra special.",
+    name: "Elena V.",
+    quote: "The prints came out beautifully, guests loved taking them home.",
   },
   {
     src: "/images/gallery-4.jpg",
     label: "Black & Gold Celebration",
-    caption: "Sleek styling to match a bold, elegant color palette.",
+    name: "Devon K.",
+    quote: "Setup was seamless and the props were a huge hit with everyone.",
   },
   {
     src: "/images/gallery-5.jpg",
     label: "Corporate Celebration",
-    caption: "A polished, professional touch for team celebrations.",
+    name: "Priya S.",
+    quote: "Professional, on time, and our team had a blast using it.",
   },
   {
     src: "/images/gallery-6.jpg",
     label: "Formal Celebration",
-    caption: "Timeless prints for a black-tie evening to remember.",
+    name: "Andre L.",
+    quote: "Elegant setup that matched our event perfectly. Highly recommend.",
   },
   {
     src: "/images/gallery-7.jpg",
     label: "Playful Moments",
-    caption: "Props and poses that had everyone cracking up.",
+    name: "Brittany H.",
+    quote: "So many laughs! The kids couldn't get enough of the booth.",
   },
   {
     src: "/images/gallery-8.jpg",
     label: "Glamorous Night Out",
-    caption: "Glitz, glam, and a photo strip to prove it.",
+    name: "Sophia M.",
+    quote: "Glam, fun, and easy to book. Already recommended to friends.",
   },
   {
     src: "/images/gallery-9.jpg",
     label: "Sweet Celebration",
-    caption: "Sweet moments captured, one flash at a time.",
+    name: "Tyler B.",
+    quote: "Made our celebration feel even more special. Thank you!",
   },
 ];
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="relative py-28">
+    <section id="gallery" className="relative bg-[#8A6D1E] py-28">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-lg">
-            <span className="eyebrow">Gallery</span>
-            <h2 className="mt-5 text-balance font-display text-4xl font-semibold tracking-tight text-cream sm:text-5xl">
+            <span className="eyebrow text-black">Gallery</span>
+            <h2 className="mt-5 text-balance font-display text-4xl font-semibold tracking-tight text-black sm:text-5xl">
               Moments, freshly printed.
             </h2>
           </div>
-          <p className="max-w-xs text-sm text-muted">
+          <p className="max-w-xs text-sm text-black/80">
             A sample of the celebrations we've had the pleasure of
             documenting, one strip at a time.
           </p>
@@ -94,9 +109,17 @@ export default function Gallery() {
                 </div>
               </div>
 
-              <div className="mt-3 rounded-xl border border-cream/10 bg-surface/60 p-3">
-                <p className="text-xs leading-snug text-cream/80">
-                  {item.caption}
+              <div className="mt-3 rounded-xl border border-black/15 bg-flash p-3">
+                <div className="flex gap-0.5 text-black">
+                  {Array.from({ length: 5 }).map((_, starIdx) => (
+                    <Star key={starIdx} size={12} fill="currentColor" strokeWidth={0} />
+                  ))}
+                </div>
+                <p className="mt-1.5 text-xs leading-snug text-black">
+                  "{item.quote}"
+                </p>
+                <p className="mt-1 text-xs font-medium text-black/70">
+                  — {item.name}
                 </p>
               </div>
             </motion.div>
