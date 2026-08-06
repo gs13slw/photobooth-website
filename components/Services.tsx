@@ -159,7 +159,7 @@ export default function Services() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.94 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="group relative overflow-hidden rounded-3xl border border-black/15 bg-flash p-7 transition-all duration-300 hover:-translate-y-1.5"
+                  className="group relative overflow-hidden rounded-3xl border border-black/15 bg-violet-100 p-7 transition-all duration-300 hover:-translate-y-1.5"
                 >
                   <div
                     aria-hidden="true"

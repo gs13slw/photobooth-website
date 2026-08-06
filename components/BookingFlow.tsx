@@ -141,8 +141,8 @@ export default function BookingFlow() {
 
   if (submitted) {
     return (
-      <div className="strip-edge mx-auto max-w-xl rounded-3xl border border-black/15 bg-gray-100 p-10 text-center shadow-strip">
-        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-ink">
+      <div className=" mx-auto max-w-xl rounded-3xl border border-black/15 bg-violet-100 p-10 text-center shadow-strip">
+        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-ink">
           <Check size={28} strokeWidth={2.5} />
         </span>
         <h3 className="mt-6 font-display text-2xl font-semibold text-black">
@@ -186,7 +186,7 @@ export default function BookingFlow() {
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
       {/* Wizard */}
-      <div className="strip-edge rounded-3xl border border-black/15 bg-gray-100 p-6 shadow-strip sm:p-9">
+      <div className=" rounded-3xl border border-black/15 bg-violet-100 p-6 shadow-strip sm:p-9">
         {/* Progress */}
         <div className="mb-9 flex items-center gap-3">
           {STEPS.map((label, i) => (
@@ -250,7 +250,7 @@ export default function BookingFlow() {
                           className={clsx(
                             "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                             isActive
-                              ? "bg-gray-100 text-ink"
+                              ? "bg-violet-100 text-ink"
                               : "bg-black/10 text-black/60"
                           )}
                         >
@@ -300,7 +300,7 @@ export default function BookingFlow() {
                             className={clsx(
                               "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                               isActive
-                                ? "bg-gray-100 text-ink"
+                                ? "bg-violet-100 text-ink"
                                 : "bg-black/10 text-black/60"
                             )}
                           >
@@ -354,7 +354,7 @@ export default function BookingFlow() {
                             className={clsx(
                               "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
                               isActive
-                                ? "bg-gray-100 text-ink"
+                                ? "bg-violet-100 text-ink"
                                 : "bg-black/10 text-black/60"
                             )}
                           >
@@ -491,7 +491,7 @@ export default function BookingFlow() {
       </div>
 
       {/* Live summary */}
-      <div className="h-fit rounded-3xl border border-black/15 bg-gray-100 p-7 lg:sticky lg:top-28">
+      <div className="h-fit rounded-3xl border border-black/15 bg-violet-100 p-7 lg:sticky lg:top-28">
         <p className="eyebrow text-black">Your estimate</p>
         <p className="mt-3 font-display text-4xl font-semibold text-black">
           ${estimate.toLocaleString()}

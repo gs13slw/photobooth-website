@@ -109,7 +109,7 @@ export default function Gallery() {
                 </div>
               </div>
 
-              <div className="mt-3 rounded-xl border border-black/15 bg-flash p-3">
+              <div className="mt-3 rounded-xl border border-black/15 bg-violet-100 p-3">
                 <div className="flex gap-0.5 text-black">
                   {Array.from({ length: 5 }).map((_, starIdx) => (
                     <Star key={starIdx} size={12} fill="currentColor" strokeWidth={0} />

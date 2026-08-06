@@ -40,7 +40,7 @@ export default function FAQ() {
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 max-w-2xl divide-y divide-black/15 rounded-3xl border border-black/15 bg-flash">
+        <div className="mx-auto mt-12 max-w-2xl divide-y divide-black/15 rounded-3xl border border-black/15 bg-violet-100">
           {FAQS.map((item, i) => {
             const isOpen = openIndex === i;
             return (
