@@ -3,7 +3,7 @@ import { CalendarCheck } from "lucide-react";
 
 export default function BookingSection() {
   return (
-    <section id="booking" className="relative bg-[#8A6D1E] py-28">
+    <section id="booking" className="relative bg-white py-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/3 h-[500px] w-[800px] -translate-x-1/2 bg-black/10 opacity-60 blur-3xl" />
       </div>

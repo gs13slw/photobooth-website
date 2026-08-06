@@ -71,7 +71,7 @@ const GALLERY_ITEMS = [
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="relative bg-[#8A6D1E] py-28">
+    <section id="gallery" className="relative bg-white py-28">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-lg">

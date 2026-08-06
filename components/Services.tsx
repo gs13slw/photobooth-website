@@ -98,7 +98,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden border-y border-black/10 bg-[#8A6D1E] py-28"
+      className="relative overflow-hidden border-y border-black/10 bg-white py-28"
     >
       <div
         aria-hidden="true"
