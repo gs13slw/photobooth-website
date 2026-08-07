@@ -17,9 +17,9 @@ export default function Home() {
         <Gallery />
         <BookingSection />
         <FAQ />
-        <Feedback 
-        />
+        <Feedback />
       </main>
       <Footer />
     </>
   );
+}
