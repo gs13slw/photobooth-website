@@ -77,7 +77,7 @@ export default function Hero() {
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
           className="relative mx-auto w-full max-w-[420px] animate-drift lg:mx-0 lg:ml-auto"
         >
-          <div className="strip-edge-light rounded-2xl border border-ink-text/10 bg-paper-raised p-3 shadow-strip">
+          <div className="rounded-2xl border border-ink-text/10 bg-paper-raised p-3 shadow-strip">
             <HeroVideo />
             <p className="mt-3 text-center font-display text-sm italic text-muted-dark">
               Lasting Moments Booth, LLC
@@ -91,6 +91,5 @@ export default function Hero() {
           />
         </motion.div>
       </div>
-    </section>
-  );
+    </section>  );
 }
