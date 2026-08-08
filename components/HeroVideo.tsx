@@ -15,7 +15,7 @@ export default function HeroVideo() {
   };
 
   return (
-    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-paper-raised">
+    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-paper-raised">
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
