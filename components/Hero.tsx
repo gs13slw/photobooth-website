@@ -75,7 +75,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40, rotate: -2 }}
           animate={{ opacity: 1, y: 0, rotate: -3 }}
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="relative mx-auto w-full max-w-[280px] animate-drift lg:mx-0 lg:ml-auto"
+          className="relative mx-auto w-full max-w-[420px] animate-drift lg:mx-0 lg:ml-auto"
         >
           <div className="strip-edge-light rounded-2xl border border-ink-text/10 bg-paper-raised p-3 shadow-strip">
             <HeroVideo />
