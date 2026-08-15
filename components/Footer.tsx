@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link fron "next/link";
+import Link from "next/link";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 
 const QUICK_LINKS = [
