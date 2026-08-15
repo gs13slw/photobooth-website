@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link fron "next/link";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 
 const QUICK_LINKS = [
@@ -113,9 +114,12 @@ export default function Footer() {
             rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="transition-colors hover:text-cream">
-              Privacy Policy
-            </a>
+            <Link href="/privacy" className="transition-colors hover:text-cream"  >
+              Privacy Notice
+            </Link>
+            <span className="hidden sm:block" aria-hidden="true">
+              |
+            </span>
             <a href="#" className="transition-colors hover:text-cream">
               Terms of Service
             </a>
