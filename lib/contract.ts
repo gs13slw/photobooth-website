@@ -5,7 +5,9 @@ import { calculateDeposit, DEPOSIT_PERCENT } from "./pricing";
 // goes out to real customers — these are reasonable placeholders, not
 // vetted legal terms.
 const BALANCE_DUE_DAYS_BEFORE = 7; // remaining balance due this many days before the event
-const CANCELLATION_NOTICE_DAYS = 14; // free reschedule window before the event
+const STANDARD_BOOKING_WEEKS = "4 to 6 weeks";
+const KIDS_PARTY_BOOKING_WEEKS = "2 weeks";
+const CANCELLATION_EXCEPTION_DAYS = 7; // window for severe weather/medical emergency exception
 const BUSINESS_NAME = "Lasting Moments Booth, LLC";
 const BUSINESS_EMAIL = "info@lastingmomentsbooth.com";
 const BUSINESS_PHONE = "(404) 436-6561";
@@ -68,14 +70,19 @@ export function generateContractHtml(inquiry: Inquiry): string {
           Secure payment powered by Clover. You'll be redirected to a secure payment page.<br />
           <strong>Submitting your deposit payment confirms that you have read, understood, and agree to all terms in this contract.</strong>
         </p>
-      </div>
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 6px; margin-top: 28px;">Advance Booking Requirement</h3>
+<ul style="font-size: 14px; padding-left: 18px;">
+  <li>Standard bookings must be made ${STANDARD_BOOKING_WEEKS} in advance.</li>
+  <li>Children's birthday parties are the only exception, requiring a minimum of ${KIDS_PARTY_BOOKING_WEEKS} advance notice.</li>
+  <li>Bookings made with less notice than required are subject to availability and final approval.</li>
+</ul>
 
-      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 6px; margin-top: 28px;">Cancellation &amp; Rescheduling</h3>
-      <ul style="font-size: 14px; padding-left: 18px;">
-        <li>One free reschedule is available if requested at least ${CANCELLATION_NOTICE_DAYS} days before the original event date, subject to availability.</li>
-        <li>Deposits are non-refundable in the event of cancellation.</li>
-      </ul>
-
+<h3 style="border-bottom: 1px solid #eee; padding-bottom: 6px; margin-top: 28px;">Cancellation &amp; Refund Policy</h3>
+<ul style="font-size: 14px; padding-left: 18px;">
+  <li>Deposits and payments are non-refundable, except in cases of severe weather or a verified medical emergency.</li>
+  <li>If a cancellation less than ${CANCELLATION_EXCEPTION_DAYS} days before the event is due to severe weather or a medical emergency, and supporting documentation is submitted within 7 days of cancellation, the Client may choose a 50% refund or a 100% credit toward rescheduling, subject to availability.</li>
+  <li>Cancellation requests must be submitted in writing to <a href="mailto:${BUSINESS_EMAIL}">${BUSINESS_EMAIL}</a>. The cancellation date is the date we receive the written request.</li>
+</ul>
       <h3 style="border-bottom: 1px solid #eee; padding-bottom: 6px; margin-top: 28px;">Service Terms</h3>
       <ul style="font-size: 14px; padding-left: 18px;">
         <li>Client agrees to provide adequate space, a level surface, and access to a standard power outlet for the booth setup at the venue.</li>
@@ -88,7 +95,10 @@ export function generateContractHtml(inquiry: Inquiry): string {
         <a href="mailto:${BUSINESS_EMAIL}">${BUSINESS_EMAIL}</a> or
         ${BUSINESS_PHONE} with any questions before paying your deposit.
       </p>
-
+<p style="font-size: 14px;">
+  Full terms and conditions are available at
+  <a href="${SITE_URL}/terms">${SITE_URL}/terms</a>.
+</p>
       <p style="font-size: 14px;">We can't wait to celebrate with you!</p>
       <p style="font-size: 14px;">— The ${BUSINESS_NAME} Team</p>
     </div>
