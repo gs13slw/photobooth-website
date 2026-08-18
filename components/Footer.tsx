@@ -120,9 +120,10 @@ export default function Footer() {
             <span className="hidden sm:block" aria-hidden="true">
               |
             </span>
-            <a href="#" className="transition-colors hover:text-cream">
-              Terms of Service
-            </a>
+            
+           <Link href="/terms" className="transition-colors hover:text-cream">
+  Terms of Service
+</Link>
           </div>
         </div>
       </div>
