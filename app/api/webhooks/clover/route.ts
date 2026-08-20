@@ -2,7 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { Redis } from "@upstash/redis";
 import { markDepositPaid } from "@/lib/inquiries";
+import { Resend } from "resend";
+import { getInquiry } from "@/lib/inquiries";
+import { generateContractPdfBuffer } from "@/lib/contract-pdf";
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM_EMAIL = process.env.CONTRACT_FROM_EMAIL || "onboarding@resend.dev";
 const redis = Redis.fromEnv();
 
 /**
@@ -67,8 +72,29 @@ export async function POST(req: NextRequest) {
         `checkout-session:${sessionId}`
       );
       if (inquiryId) {
-        await markDepositPaid(inquiryId);
-      } else {
+  await markDepositPaid(inquiryId);
+
+  const inquiry = await getInquiry(inquiryId);
+  if (inquiry) {
+    try {
+      const pdfBuffer = await generateContractPdfBuffer(inquiry);
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: inquiry.email,
+        subject: "Deposit Received — Your Booking is Confirmed!",
+        html: `<p>Hi ${inquiry.name},</p><p>We've received your deposit and your booking for ${inquiry.eventDate} is officially confirmed. Your signed receipt and booking confirmation is attached.</p><p>We can't wait to celebrate with you!</p><p>— The Lasting Moments Booth Team</p>`,
+        attachments: [
+          {
+            filename: "Lasting-Moments-Booking-Confirmation.pdf",
+            content: pdfBuffer,
+          },
+        ],
+      });
+    } catch (err) {
+      console.error("Failed to send deposit confirmation email:", err);
+    }
+  }
+} else {
         console.warn(
           `Clover webhook: no inquiry found for session ${sessionId}`
         );
