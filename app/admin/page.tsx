@@ -228,7 +228,11 @@ function AdminDashboard() {
               />
             ))
           )}
-        </div>
+              </div>
+      </div>
+
+      <div className="mt-14">
+        <ChangePasswordForm />
       </div>
     </main>
   );
