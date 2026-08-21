@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import { cookies } from "next/headers";
+import { Redis } from "@upstash/redis";
 
 export const ADMIN_COOKIE_NAME = "lmb_admin_session";
 const SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -36,4 +37,18 @@ export function verifySessionToken(token: string | undefined | null): boolean {
 export function isAdminRequest(): boolean {
   const token = cookies().get(ADMIN_COOKIE_NAME)?.value;
   return verifySessionToken(token);
+}
+
+const redis = Redis.fromEnv();
+const ADMIN_PASSWORD_KEY = "admin:password";
+
+/** Returns the current admin password: Redis value if set, otherwise the env var fallback. */
+export async function getAdminPassword(): Promise<string | null> {
+  const stored = await redis.get<string>(ADMIN_PASSWORD_KEY);
+  if (stored) return stored;
+  return process.env.ADMIN_PASSWORD || null;
+}
+
+export async function setAdminPassword(newPassword: string): Promise<void> {
+  await redis.set(ADMIN_PASSWORD_KEY, newPassword);
 }

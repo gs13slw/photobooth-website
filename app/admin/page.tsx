@@ -5,7 +5,9 @@ import { Lock, Plus, Copy, Check, Upload, Clock } from "lucide-react";
 import clsx from "clsx";
 import AdminAvailabilityManager from "@/components/AdminAvailabilityManager";
 import AdminInquiries from "@/components/AdminInquiries";
-
+import AdminAvailabilityManager from "@/components/AdminAvailabilityManager";
+import AdminInquiries from "@/components/AdminInquiries";
+import ChangePasswordForm from "@/components/ChangePasswordForm";
 interface GalleryEvent {
   code: string;
   eventDate: string;
