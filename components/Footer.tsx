@@ -23,15 +23,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <a href="#top" className="flex items-center gap-3">
-              <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full ring-1 ring-cream/15">
-                <Image
-                  src="/images/logo.png"
-                  alt="Lasting Moments Booth, LLC"
-                  fill
-                  sizes="80px"
-                  className="object-cover"
-                />
-              </span>
+              <span className="relative h-14 w-44 shrink-0 overflow-hidden rounded-lg ring-1 ring-cream/15">
+  <Image
+    src="/images/logo.png"
+    alt="Lasting Moments Booth, LLC"
+    fill
+    sizes="176px"
+    className="object-contain"
+  />
+</span>
               <span className="font-display text-lg font-semibold text-cream">
                 Lasting Moments
                 <span className="text-flash-soft"> Booth</span>
@@ -85,10 +85,10 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Mail size={15} className="text-flash-soft" />
                 <a
-                  href="mailto:info@lastingmomentsbooth.com"
+                  href="mailto:info@lastingmomentsboothllc.com"
                   className="transition-colors hover:text-flash-soft"
                 >
-                  info@lastingmomentsbooth.com
+                  info@lastingmomentsboothllc.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
