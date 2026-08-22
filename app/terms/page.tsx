@@ -61,8 +61,8 @@ export default function TermsOfServicePage() {
       <h2 className="text-xl font-semibold mt-8 mb-3">3. How to Cancel</h2>
       <p className="mb-6">
         Cancellation requests must be submitted in writing via email to{" "}
-        <a href="mailto:info@lastingmomentsbooth.com" className="underline">
-          info@lastingmomentsbooth.com
+        <a href="mailto:info@lastingmomentsboothllc.com" className="underline">
+          info@lastingmomentsboothllc.com
         </a>
         . The official cancellation date is recorded as the date the Company
         receives the written request, not the date the Client decided to

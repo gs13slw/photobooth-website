@@ -13,7 +13,7 @@ import { calculateDeposit } from "./pricing";
 
 // Keep these in sync with the values in lib/contract.ts
 const BUSINESS_NAME = "Lasting Moments Booth, LLC";
-const BUSINESS_EMAIL = "info@lastingmomentsbooth.com";
+const BUSINESS_EMAIL = "info@lastingmomentsboothllc.com";
 const GOVERNING_STATE = "Georgia";
 const SITE_URL =
   process.env.SITE_URL || "https://photobooth-website-rho.vercel.app";

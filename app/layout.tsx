@@ -17,7 +17,7 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {metadataBase: new URL("https://lastingmomentsbooth.com"),
+export const metadata: Metadata = {metadataBase: new URL("https://lastingmomentsboothllc.com"),
   alternates: {
     canonical: "/",
   },

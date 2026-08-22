@@ -83,10 +83,10 @@ export default function PrivacyPolicyPage() {
       <h2 className="text-xl font-semibold mt-8 mb-3">Contact us</h2>
       <p>
         Lasting Moments Booth, LLC ·{" "}
-        <a href="mailto:info@lastingmomentsbooth.com" className="underline">
-          info@lastingmomentsbooth.com
+        <a href="mailto:info@lastingmomentsboothllc.com" className="underline">
+          info@lastingmomentsboothllc.com
         </a>{" "}
-        · lastingmomentsbooth.com
+        · lastingmomentsboothllc.com
       </p>
     </main>
   );

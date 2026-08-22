@@ -19,7 +19,7 @@ export default function Feedback() {
             we can better serve you, we'd genuinely love to hear it.
           </p>
           <a
-            href="mailto:info@lastingmomentsbooth.com?subject=Website%20Feedback"
+            href="mailto:info@lastingmomentsboothllc.com?subject=Website%20Feedback"
             className="btn-primary mt-8 inline-flex"
           >
             Share your feedback
