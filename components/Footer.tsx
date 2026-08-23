@@ -36,6 +36,9 @@ export default function Footer() {
                 Lasting Moments
                 <span className="text-flash-soft"> Booth</span>
               </span>
+              <p className="text-xs text-muted mt-1">
+  Presented by Williams Elite Enterprizes LLC dba WEE Design
+</p>
             </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
               Premium photo booth experiences designed to make every moment
