@@ -32,13 +32,15 @@ export default function Footer() {
     className="object-contain"
   />
 </span>
-              <span className="font-display text-lg font-semibold text-cream">
-                Lasting Moments
-                <span className="text-flash-soft"> Booth</span>
-              </span>
-              <p className="text-xs text-muted mt-1">
-  Presented by Williams Elite Enterprizes LLC dba WEE Design
-</p>
+             <div className="flex flex-col">
+  <span className="font-display text-lg font-semibold text-cream">
+    Lasting Moments
+    <span className="text-flash-soft"> Booth</span>
+  </span>
+  <p className="text-xs text-muted mt-1">
+    Presented by Williams Elite Enterprizes LLC dba WEE Design
+  </p>
+</div>
             </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
               Premium photo booth experiences designed to make every moment
