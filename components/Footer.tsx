@@ -23,16 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <a href="#top" className="flex items-center gap-3">
-              <span className="relative h-14 w-44 shrink-0 overflow-hidden rounded-lg ring-1 ring-cream/15">
-  <Image
-    src="/images/logo.png"
-    alt="Lasting Moments Booth, LLC"
-    fill
-    sizes="176px"
-    className="object-contain"
-  />
-</span>
-             <div className="flex flex-col">
+      <div className="flex flex-col">
   <span className="font-display text-lg font-semibold text-cream">
     Lasting Moments
     <span className="text-flash-soft"> Booth</span>
@@ -41,6 +32,7 @@ export default function Footer() {
     Presented by Williams Elite Enterprizes LLC dba WEE Design
   </p>
 </div>
+             
             </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
               Premium photo booth experiences designed to make every moment
