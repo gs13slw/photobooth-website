@@ -65,7 +65,7 @@ export default function AdminPage() {
             <Lock size={18} />
           </span>
           <h1 className="mt-5 font-display text-2xl font-semibold text-cream">
-            Client &amp; admin access
+            Admin Access
           </h1>
           <p className="mt-2 text-sm text-muted">
             Enter your password to create event galleries and upload photos.
