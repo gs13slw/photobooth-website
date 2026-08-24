@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { label: "Booking", href: "#booking" },
   { label: "FAQ", href: "#faq" },
   { label: "My Photos", href: "/gallery" },
+  { label: "Admin", href: "/admin" },
 ];
 
 export default function Header() {
