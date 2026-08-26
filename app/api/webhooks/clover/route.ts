@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { calculateDeposit } from "@/lib/pricing";
 import crypto from "crypto";
 import { Redis } from "@upstash/redis";
 import { markDepositPaid } from "@/lib/inquiries";
@@ -67,38 +68,44 @@ export async function POST(req: NextRequest) {
 
   if (isApprovedPayment) {
     const sessionId = payload?.data;
+
     if (sessionId) {
       const inquiryId = await redis.get<string>(
         `checkout-session:${sessionId}`
       );
-      if (inquiryId) {
-  await markDepositPaid(inquiryId);
 
-  const inquiry = await getInquiry(inquiryId);
-  if (inquiry) {
-    try {
-      const pdfBuffer = await generateContractPdfBuffer(inquiry);
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: inquiry.email,
-        subject: "Deposit Received — Your Booking is Confirmed!",
-        html: `<p>Hi ${inquiry.name},</p><p>We've received your deposit and your booking for ${inquiry.eventDate} is officially confirmed. Your signed receipt and booking confirmation is attached.</p><p>We can't wait to celebrate with you!</p><p>— The Lasting Moments Booth Team</p>`,
-        attachments: [
-          {
-            filename: "Lasting-Moments-Booking-Confirmation.pdf",
-            content: pdfBuffer,
-          },
-        ],
-      });
-    } catch (err) {
-      console.error("Failed to send deposit confirmation email:", err);
-    }
-  }
-} else {
-        console.warn(
-          `Clover webhook: no inquiry found for session ${sessionId}`
-        );
+      if (inquiryId) {
+        const inquiryForAmount = await getInquiry(inquiryId);
+        const amountPaid = inquiryForAmount
+          ? calculateDeposit(inquiryForAmount.estimate).deposit
+          : undefined;
+        await markDepositPaid(inquiryId, amountPaid);
+
+        const inquiry = await getInquiry(inquiryId);
+        if (inquiry) {
+          try {
+            const pdfBuffer = await generateContractPdfBuffer(inquiry);
+            await resend.emails.send({
+              from: FROM_EMAIL,
+              to: inquiry.email,
+              subject: "Deposit Received — Your Booking is Confirmed!",
+              html: `<p>Hi ${inquiry.name},</p><p>We've received your deposit and your booking for ${inquiry.eventDate} is officially confirmed.</p>`,
+              attachments: [
+                {
+                  filename: "Lasting-Moments-Booking-Confirmation.pdf",
+                  content: pdfBuffer,
+                },
+              ],
+            });
+          } catch (err) {
+            console.error("Failed to send deposit confirmation email:", err);
+          }
+        }
       }
+    } else {
+      console.warn(
+        `Clover webhook: no inquiry found for session ${sessionId}`
+      );
     }
   }
 

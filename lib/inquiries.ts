@@ -15,7 +15,9 @@ export interface Inquiry {
   createdAt: number;
   contacted: boolean;
   contractSentAt?: number;
-  depositPaidAt?: number;
+ depositPaidAt?: number;
+depositAmount?: number;
+
 }
 
 export async function createInquiry(
@@ -59,10 +61,16 @@ export async function markContractSent(id: string): Promise<Inquiry | null> {
   return inquiry;
 }
 
-export async function markDepositPaid(id: string): Promise<Inquiry | null> {
+export async function markDepositPaid(
+  id: string,
+  amount?: number
+): Promise<Inquiry | null> {
   const inquiry = await redis.get<Inquiry>(`inquiry:${id}`);
   if (!inquiry) return null;
   inquiry.depositPaidAt = Date.now();
+  if (typeof amount === "number") {
+    inquiry.depositAmount = amount;
+  }
   await redis.set(`inquiry:${id}`, inquiry);
   return inquiry;
 }

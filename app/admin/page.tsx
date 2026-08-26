@@ -6,6 +6,7 @@ import clsx from "clsx";
 import AdminAvailabilityManager from "@/components/AdminAvailabilityManager";
 import AdminInquiries from "@/components/AdminInquiries";
 import ChangePasswordForm from "@/components/ChangePasswordForm";
+import AccountingDashboard from "@/components/AccountingDashboard";
 interface GalleryEvent {
   code: string;
   eventDate: string;
@@ -152,7 +153,22 @@ function AdminDashboard() {
         <div className="mt-8">
           <AdminAvailabilityManager />
         </div>
+<div className="mt-8">
+  <AdminAvailabilityManager />
+</div>
 
+<div className="mt-14">
+  <h2 className="font-display text-2xl font-semibold text-cream">
+    Accounting
+  </h2>
+  <p className="mt-2 max-w-xl text-muted">
+    Income is pulled automatically from paid deposits. Add your business
+    expenses below to keep a running total for tax time.
+  </p>
+  <div className="mt-6">
+    <AccountingDashboard />
+  </div>
+</div>
         <h2 className="mt-14 font-display text-2xl font-semibold text-cream">
           Event galleries
         </h2>
