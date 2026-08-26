@@ -153,9 +153,7 @@ function AdminDashboard() {
         <div className="mt-8">
           <AdminAvailabilityManager />
         </div>
-<div className="mt-8">
-  <AdminAvailabilityManager />
-</div>
+
 
 <div className="mt-14">
   <h2 className="font-display text-2xl font-semibold text-cream">
