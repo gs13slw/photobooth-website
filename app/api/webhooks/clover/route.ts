@@ -1,3 +1,4 @@
+import { blockDate } from "@/lib/availability";
 import { NextRequest, NextResponse } from "next/server";
 import { calculateDeposit } from "@/lib/pricing";
 import crypto from "crypto";
@@ -83,6 +84,7 @@ export async function POST(req: NextRequest) {
 
         const inquiry = await getInquiry(inquiryId);
         if (inquiry) {
+          await blockDate(inquiry.eventDate);
           try {
             const pdfBuffer = await generateContractPdfBuffer(inquiry);
             await resend.emails.send({
@@ -93,21 +95,3 @@ export async function POST(req: NextRequest) {
               attachments: [
                 {
                   filename: "Lasting-Moments-Booking-Confirmation.pdf",
-                  content: pdfBuffer,
-                },
-              ],
-            });
-          } catch (err) {
-            console.error("Failed to send deposit confirmation email:", err);
-          }
-        }
-      }
-    } else {
-      console.warn(
-        `Clover webhook: no inquiry found for session ${sessionId}`
-      );
-    }
-  }
-
-  return NextResponse.json({ ok: true });
-}

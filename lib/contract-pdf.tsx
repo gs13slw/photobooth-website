@@ -415,6 +415,197 @@ export function ContractDocument({ inquiry }: { inquiry: Inquiry }) {
     </Document>
   );
 }
+export function ContractPreviewDocument({ inquiry }: { inquiry: Inquiry }) {
+  const { deposit, balance } = calculateDeposit(inquiry.estimate);
+
+  return (
+    <Document>
+      <Page size="LETTER" style={styles.page}>
+        <Image
+          src={`${SITE_URL}/images/contract-header.png`}
+          style={styles.headerImage}
+        />
+
+        <Text style={styles.title}>BOOKING CONTRACT & SERVICE AGREEMENT</Text>
+        <Text style={styles.intro}>
+  This Booking Contract & Service Agreement outlines the terms for
+  your upcoming event with {BUSINESS_NAME}. Please review the details
+  below, then use the deposit payment link in your confirmation email
+  to secure your date.
+</Text>
+          Booking Contract &amp; Service Agreement.
+        </Text>
+
+        <View style={styles.columns}>
+          <View style={styles.col}>
+            <SectionBar>1. BOOKING DETAILS</SectionBar>
+            <View style={styles.row}>
+              <Text style={styles.label}>Client Name</Text>
+              <Text style={styles.value}>{inquiry.name}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Client Email</Text>
+              <Text style={styles.value}>{inquiry.email}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Event Date</Text>
+              <Text style={styles.value}>{formatDate(inquiry.eventDate)}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Event Type</Text>
+              <Text style={styles.value}>{inquiry.eventType || "\u2014"}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Package</Text>
+              <Text style={styles.value}>{inquiry.packageTier || "\u2014"}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Add-ons</Text>
+              <Text style={styles.value}>
+                {inquiry.addOns?.length ? inquiry.addOns.join(", ") : "\u2014"}
+              </Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Guest Count</Text>
+              <Text style={styles.value}>{inquiry.guestCount || "\u2014"}</Text>
+            </View>
+
+            <SectionBar>2. PAYMENT TERMS</SectionBar>
+            <Text style={styles.bodyText}>
+              A deposit of 50% of the total cost of the items selected is due
+              at the time of booking to reserve the event date. The remaining
+              balance is due in full no later than 7 days prior to the event
+              date.
+            </Text>
+            <View style={styles.table}>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCellLabel}>Total Cost of Items Selected</Text>
+                <Text style={styles.tableCellValue}>
+                  ${inquiry.estimate.toLocaleString()}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCellLabel}>Deposit Received (50%)</Text>
+                <Text style={styles.tableCellValue}>
+                  ${deposit.toLocaleString()}
+                </Text>
+              </View>
+              <View style={styles.tableRowLast}>
+                <Text style={styles.tableCellLabel}>Balance Due (7 days before event)</Text>
+                <Text style={styles.tableCellValue}>
+                  ${balance.toLocaleString()}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.adviceBox}>
+              <Text style={styles.adviceTitle}>ADVANCE BOOKING REQUIREMENT</Text>
+              <Text style={styles.adviceMain}>
+                ALL BOOKINGS MUST BE MADE {STANDARD_BOOKING_WEEKS.toUpperCase()}
+              </Text>
+              <Text style={styles.adviceSub}>
+                The only exception is children's birthday parties, which
+                require a minimum of {KIDS_PARTY_BOOKING_WEEKS} advance
+                notice. Bookings made with less notice than required are
+                subject to Company's availability and approval.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.col}>
+            <SectionBar>3. CANCELLATION AND REFUND POLICY</SectionBar>
+            <Text style={styles.bodyText}>
+              The only cancellation and refund exception under this Agreement
+              is for severe weather or a medical emergency as described
+              below.
+            </Text>
+            <Text style={[styles.bodyText, { fontFamily: "Helvetica-Bold", color: MAROON }]}>
+              EXCEPTION: SEVERE WEATHER OR MEDICAL EMERGENCY
+            </Text>
+            <Text style={styles.bodyText}>
+              If a cancellation made less than {CANCELLATION_EXCEPTION_DAYS}{" "}
+              days before the event is due to severe weather or a medical
+              emergency, and Client submits supporting documentation (such as
+              a weather advisory, medical note, or hospital record) to
+              Company, Client may choose one of the following instead of
+              forfeiting funds paid:
+            </Text>
+            <View style={styles.bullet}>
+              <Text style={styles.bulletDot}>{"\u2022"}</Text>
+              <Text style={styles.bulletText}>A 50% refund of funds paid, or</Text>
+            </View>
+            <View style={styles.bullet}>
+              <Text style={styles.bulletDot}>{"\u2022"}</Text>
+              <Text style={styles.bulletText}>
+                A full credit of funds paid toward rescheduling the event to
+                a new date, subject to Company's availability.
+              </Text>
+            </View>
+            <Text style={styles.bodyText}>
+              Documentation must be submitted to Company within 7 days of the
+              cancellation for this exception to apply.
+            </Text>
+
+            <SectionBar>4. HOW TO CANCEL</SectionBar>
+            <Text style={styles.bodyText}>
+              Cancellation requests must be submitted in writing to{" "}
+              <Text style={styles.link}>{BUSINESS_EMAIL}</Text>. The
+              cancellation date is the date Company receives the written
+              request, not the date Client decides to cancel.
+            </Text>
+
+            <SectionBar>5. GENERAL TERMS</SectionBar>
+            <Text style={styles.bodyText}>
+              This Agreement is between Company and Client only and is not
+              transferable without Company's written consent.
+            </Text>
+            <Text style={styles.bodyText}>
+              Company will make commercially reasonable efforts to provide
+              the services described above, but is not liable for delays or
+              failures caused by circumstances beyond its reasonable
+              control.
+            </Text>
+            <Text style={styles.bodyText}>
+              This Agreement is governed by the laws of the State of{" "}
+              {GOVERNING_STATE}.
+            </Text>
+
+            <View style={styles.receiptBox}>
+              <Text style={styles.receiptTitle}>6. AGREEMENT CONFIRMATION</Text>
+              <Text style={[styles.bodyText, { marginBottom: 8 }]}>
+                By submitting the deposit payment below, Client acknowledged
+                having read, understood, and agreed to the terms of the
+                Booking Contract &amp; Service Agreement, including the
+                cancellation and refund policy above.
+              </Text>
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Deposit Received</Text>
+                <Text style={styles.receiptValue}>
+                  ${deposit.toLocaleString()}
+                </Text>
+              </View>
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Date Received</Text>
+                <Text style={styles.receiptValue}>
+                  {formatDateTime(inquiry.depositPaidAt)}
+                </Text>
+              </View>
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Payment Processor</Text>
+                <Text style={styles.receiptValue}>Clover</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <Text style={styles.footer}>
+          Full Terms of Service: {SITE_URL}/terms  \u2022  Privacy Policy:{" "}
+          {SITE_URL}/privacy  \u2022  {BUSINESS_EMAIL}
+        </Text>
+      </Page>
+    </Document>
+  );
+}
 
 export async function generateContractPdfBuffer(
   inquiry: Inquiry
