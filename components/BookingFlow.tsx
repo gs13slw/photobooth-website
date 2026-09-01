@@ -152,9 +152,17 @@ export default function BookingFlow() {
           Your inquiry for a {eventType?.toLowerCase()} on{" "}
           <span className="text-black">{contact.date}</span> is in. We'll
           follow up at <span className="text-black">{contact.email}</span>{" "}
-          within one business day with availability and a formal quote.
-        </p>
-        <div className="mt-6 rounded-2xl bg-ink px-6 py-4">
+                       within one business day with availability and a formal quote.
+            </p>
+            <p className="mt-4 text-sm text-black/70">
+              To make sure our reply doesn't land in spam, please add{" "}
+              <span className="text-black">
+                contracts@lastingmomentsboothllc.com
+              </span>{" "}
+              to your contacts. If you haven't heard from us within 72
+              hours, please check your spam or junk folder.
+            </p>
+            <div className="mt-6 rounded-2xl bg-ink px-6 py-4">
           <p className="text-xs uppercase tracking-wide text-black/70">
             Estimated total
           </p>
