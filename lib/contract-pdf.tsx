@@ -238,7 +238,7 @@ export function ContractDocument({ inquiry }: { inquiry: Inquiry }) {
         />
 
         <Text style={styles.title}>DEPOSIT RECEIPT & BOOKING CONFIRMATION</Text>
-        <Text style={styles.intro}>
+                <Text style={styles.intro}>
           This confirms {BUSINESS_NAME} ("Company") has received Client's
           deposit payment below, confirming the booking of photo booth rental
           services for the event detailed here, under the terms of the
@@ -433,8 +433,6 @@ export function ContractPreviewDocument({ inquiry }: { inquiry: Inquiry }) {
   below, then use the deposit payment link in your confirmation email
   to secure your date.
 </Text>
-          Booking Contract &amp; Service Agreement.
-        </Text>
 
         <View style={styles.columns}>
           <View style={styles.col}>

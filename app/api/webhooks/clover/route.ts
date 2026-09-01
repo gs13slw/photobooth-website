@@ -95,3 +95,21 @@ export async function POST(req: NextRequest) {
               attachments: [
                 {
                   filename: "Lasting-Moments-Booking-Confirmation.pdf",
+                                    content: pdfBuffer,
+                },
+              ],
+            });
+          } catch (err) {
+            console.error("Failed to send deposit confirmation email:", err);
+          }
+        }
+      } else {
+        console.warn(
+          `Clover webhook: no inquiry found for session ${sessionId}`
+        );
+      }
+    }
+  }
+
+  return NextResponse.json({ ok: true });
+}
