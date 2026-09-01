@@ -610,3 +610,8 @@ export async function generateContractPdfBuffer(
 ): Promise<Buffer> {
   return renderToBuffer(<ContractDocument inquiry={inquiry} />);
 }
+export async function generateContractPreviewPdfBuffer(
+  inquiry: Inquiry
+): Promise<Buffer> {
+  return renderToBuffer(<ContractPreviewDocument inquiry={inquiry} />);
+}
