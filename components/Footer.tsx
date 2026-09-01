@@ -29,7 +29,7 @@ export default function Footer() {
     <span className="text-flash-soft"> Booth</span>
   </span>
   <p className="text-xs text-muted mt-1">
-    Presented by Williams Elite Enterprizes LLC dba WEE Design
+        Presented by Williams Elite Enterprizes LLC dba WEEWebDesign
   </p>
 </div>
              
