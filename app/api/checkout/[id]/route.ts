@@ -7,10 +7,12 @@ import { calculateDeposit } from "@/lib/pricing";
 const redis = Redis.fromEnv();
 
 // This is a GET route (not POST) on purpose — it's meant to be a plain
-// link inside the contract email ("Pay Deposit Now"), not called via
-// fetch. Visiting it creates a brand-new Clover session (they expire
-// after 15 minutes, so we can't pre-generate one at email-send time)
-// and immediately redirects to Clover's hosted payment page.
+// link inside emails ("Pay Deposit Now" / "Pay Final Balance Now"), not
+// called via fetch. Visiting it creates a brand-new Clover session (they
+// expire after 15 minutes, so we can't pre-generate one at email-send
+// time) and immediately redirects to Clover's hosted payment page.
+//
+// Add ?type=final to charge the remaining balance instead of the deposit.
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -23,28 +25,37 @@ export async function GET(
     return NextResponse.redirect(`${siteUrl}/booking/thank-you?status=notfound`);
   }
 
-  const { deposit } = calculateDeposit(inquiry.estimate);
+  const isFinal = req.nextUrl.searchParams.get("type") === "final";
+  const { deposit, balance } = calculateDeposit(inquiry.estimate);
+  const amount = isFinal ? balance : deposit;
+  const description = isFinal
+    ? `Final Balance — ${inquiry.packageTier || "Booking"} Package (${inquiry.eventDate})`
+    : `Deposit — ${inquiry.packageTier || "Booking"} Package (${inquiry.eventDate})`;
 
   try {
     const checkout = await createCloverCheckout({
-      amountCents: deposit * 100,
+      amountCents: amount * 100,
       customerEmail: inquiry.email,
       customerName: inquiry.name,
-      description: `Deposit — ${inquiry.packageTier || "Booking"} Package (${inquiry.eventDate})`,
-      successUrl: `${siteUrl}/booking/thank-you?inquiry=${inquiry.id}`,
-      failureUrl: `${siteUrl}/booking/thank-you?inquiry=${inquiry.id}&status=failed`,
+      description,
+      successUrl: `${siteUrl}/booking/thank-you?inquiry=${inquiry.id}${
+        isFinal ? "&type=final" : ""
+      }`,
+      failureUrl: `${siteUrl}/booking/thank-you?inquiry=${inquiry.id}&status=failed${
+        isFinal ? "&type=final" : ""
+      }`,
     });
 
     // Correlate this Clover session back to the inquiry, so the webhook
     // (which only gives us a session ID, not our own inquiry ID) can find
-    // its way back to the right record. 1 hour is plenty since Clover
-    // sessions themselves expire after 15 minutes.
+    // its way back to the right record. We prefix with "final:" so the
+    // webhook knows which kind of payment this session represents.
     const sessionId =
       (checkout.checkoutSessionId as string | undefined) ||
       checkout.href.split("/").filter(Boolean).pop();
-
     if (sessionId) {
-      await redis.set(`checkout-session:${sessionId}`, inquiry.id, {
+      const sessionValue = isFinal ? `final:${inquiry.id}` : inquiry.id;
+      await redis.set(`checkout-session:${sessionId}`, sessionValue, {
         ex: 3600,
       });
     }

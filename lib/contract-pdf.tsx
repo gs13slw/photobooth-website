@@ -440,14 +440,30 @@ export function ContractDocument({ inquiry }: { inquiry: Inquiry }) {
                   {formatDateTime(inquiry.depositPaidAt)}
                 </Text>
               </View>
-              <View style={styles.receiptRow}>
+                           <View style={styles.receiptRow}>
                 <Text style={styles.receiptLabel}>Payment Processor</Text>
                 <Text style={styles.receiptValue}>Clover</Text>
               </View>
             </View>
+
+            <View style={styles.payBox}>
+              <Text style={styles.payBoxTitle}>
+                Remaining Balance: ${balance.toLocaleString()} — Due {formatBalanceDueDate(inquiry.eventDate)}
+              </Text>
+              <Link
+                src={`${SITE_URL}/api/checkout/${inquiry.id}?type=final`}
+                style={styles.payButton}
+              >
+                <Text style={styles.payButtonText}>
+                  Pay Final Balance — ${balance.toLocaleString()}
+                </Text>
+              </Link>
+              <Text style={styles.paySubtext}>
+                Secure payment powered by Clover
+              </Text>
+            </View>
           </View>
         </View>
-
         <Text style={styles.footer}>
           Full Terms of Service: {SITE_URL}/terms  \u2022  Privacy Policy:{" "}
           {SITE_URL}/privacy  \u2022  {BUSINESS_EMAIL}
