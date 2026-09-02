@@ -7,6 +7,7 @@ import AdminAvailabilityManager from "@/components/AdminAvailabilityManager";
 import AdminInquiries from "@/components/AdminInquiries";
 import ChangePasswordForm from "@/components/ChangePasswordForm";
 import AccountingDashboard from "@/components/AccountingDashboard";
+
 interface GalleryEvent {
   code: string;
   eventDate: string;
@@ -22,6 +23,8 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
 
   useEffect(() => {
     fetch("/api/events")
@@ -45,6 +48,19 @@ export default function AdminPage() {
       const data = await res.json().catch(() => ({}));
       setLoginError(data.error || "Something went wrong.");
     }
+  };
+
+  const handleForgotPassword = async () => {
+    setSendingReset(true);
+    setResetSent(false);
+    try {
+      await fetch("/api/admin/forgot-password", { method: "POST" });
+    } catch {
+      // Intentionally silent — we show the same message either way, so we
+      // don't reveal whether an admin account/email exists.
+    }
+    setSendingReset(false);
+    setResetSent(true);
   };
 
   if (authed === null) {
@@ -87,11 +103,23 @@ export default function AdminPage() {
           >
             {loggingIn ? "Checking..." : "Log in"}
           </button>
+          <button
+            type="button"
+            onClick={handleForgotPassword}
+            disabled={sendingReset}
+            className="mt-3 w-full text-center text-xs text-muted underline hover:text-cream disabled:opacity-50"
+          >
+            {sendingReset ? "Sending..." : "Forgot password?"}
+          </button>
+          {resetSent && (
+            <p className="mt-3 text-center text-xs text-muted">
+              If this admin panel has a reset email configured, a reset link was just sent to it.
+            </p>
+          )}
         </form>
       </main>
     );
   }
-
   return <AdminDashboard />;
 }
 
@@ -154,19 +182,19 @@ function AdminDashboard() {
           <AdminAvailabilityManager />
         </div>
 
+        <div className="mt-14">
+          <h2 className="font-display text-2xl font-semibold text-cream">
+            Accounting
+          </h2>
+          <p className="mt-2 max-w-xl text-muted">
+            Income is pulled automatically from paid deposits. Add your business
+            expenses below to keep a running total for tax time.
+          </p>
+          <div className="mt-6">
+            <AccountingDashboard />
+          </div>
+        </div>
 
-<div className="mt-14">
-  <h2 className="font-display text-2xl font-semibold text-cream">
-    Accounting
-  </h2>
-  <p className="mt-2 max-w-xl text-muted">
-    Income is pulled automatically from paid deposits. Add your business
-    expenses below to keep a running total for tax time.
-  </p>
-  <div className="mt-6">
-    <AccountingDashboard />
-  </div>
-</div>
         <h2 className="mt-14 font-display text-2xl font-semibold text-cream">
           Event galleries
         </h2>
@@ -242,7 +270,7 @@ function AdminDashboard() {
               />
             ))
           )}
-              </div>
+        </div>
       </div>
 
       <div className="mt-14">

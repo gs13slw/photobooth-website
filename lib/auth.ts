@@ -33,6 +33,20 @@ export function verifySessionToken(token: string | undefined | null): boolean {
   return Date.now() < Number(expiry);
 }
 
+const RESET_TOKEN_TTL_MS = 30 * 60 * 1000; // 30 minutes
+
+/** A signed "expiry.signature" reset token — separate purpose from session tokens. */
+export function createResetToken(): string {
+  const expiry = String(Date.now() + RESET_TOKEN_TTL_MS);
+  return `${expiry}.${sign(`reset:${expiry}`)}`;
+}
+export function verifyResetToken(token: string | undefined | null): boolean {
+  if (!token) return false;
+  const [expiry, signature] = token.split(".");
+  if (!expiry || !signature) return false;
+  if (sign(`reset:${expiry}`) !== signature) return false;
+  return Date.now() < Number(expiry);
+}
 /** Call from Route Handlers (Node runtime) to check the current request. */
 export function isAdminRequest(): boolean {
   const token = cookies().get(ADMIN_COOKIE_NAME)?.value;
