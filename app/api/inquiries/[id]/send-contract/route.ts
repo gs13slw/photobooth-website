@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { isAdminRequest } from "@/lib/auth";
 import { getInquiry, markContractSent } from "@/lib/inquiries";
-import { generateContractHtml } from "@/lib/contract";
+import { generateContractPreviewPdfBuffer } from "@/lib/contract-pdf";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Use Resend's test domain until lastingmomentsphotobooth.com + Zoho Mail are live.
 const FROM_EMAIL = process.env.CONTRACT_FROM_EMAIL || "onboarding@resend.dev";
 
 export async function POST(
@@ -22,14 +20,20 @@ export async function POST(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const html = generateContractHtml(inquiry);
-
   try {
+    const pdfBuffer = await generateContractPreviewPdfBuffer(inquiry);
+
     await resend.emails.send({
       from: FROM_EMAIL,
       to: inquiry.email,
       subject: `Your Booking Confirmation & Agreement — Lasting Moments Booth`,
-      html,
+      html: `<p>Hi ${inquiry.name},</p><p>Thank you for booking with Lasting Moments Booth! Your booking contract is attached as a PDF, including your deposit amount, balance due date, and a secure link to pay your deposit and confirm your date.</p>`,
+      attachments: [
+        {
+          filename: "Lasting-Moments-Booking-Contract.pdf",
+          content: pdfBuffer,
+        },
+      ],
     });
   } catch (err) {
     console.error("Failed to send contract email:", err);
@@ -40,6 +44,6 @@ export async function POST(
   }
 
   const updated = await markContractSent(params.id);
-
   return NextResponse.json({ ok: true, inquiry: updated });
 }
+
