@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   StyleSheet,
+  Link,
   renderToBuffer,
 } from "@react-pdf/renderer";
 import type { Inquiry } from "./inquiries";
@@ -40,6 +41,17 @@ function formatDate(iso?: string): string {
 function formatDateTime(ms?: number): string {
   if (!ms) return "\u2014";
   return new Date(ms).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function formatBalanceDueDate(eventDate?: string): string {
+  if (!eventDate) return "\u2014";
+  const d = new Date(`${eventDate}T00:00:00`);
+  d.setDate(d.getDate() - 7);
+  return d.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -213,8 +225,37 @@ const styles = StyleSheet.create({
     fontSize: 7.5,
     color: MUTED,
   },
-  link: {
+   link: {
     color: MAROON,
+  },
+  payBox: {
+    borderWidth: 2,
+    borderColor: GOLD,
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 10,
+    alignItems: "center",
+    backgroundColor: "#FBF4E4",
+  },
+  payBoxTitle: {
+    fontSize: 9,
+    marginBottom: 6,
+  },
+  payButton: {
+    backgroundColor: MAROON,
+    borderRadius: 4,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+  },
+  payButtonText: {
+    color: "#FFFFFF",
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+  },
+  paySubtext: {
+    fontSize: 7,
+    color: MUTED,
+    marginTop: 6,
   },
 });
 
@@ -482,18 +523,38 @@ export function ContractPreviewDocument({ inquiry }: { inquiry: Inquiry }) {
                   ${inquiry.estimate.toLocaleString()}
                 </Text>
               </View>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableCellLabel}>Deposit Received (50%)</Text>
+                            <View style={styles.tableRow}>
+                <Text style={styles.tableCellLabel}>Deposit Due Now (50%)</Text>
                 <Text style={styles.tableCellValue}>
                   ${deposit.toLocaleString()}
                 </Text>
               </View>
               <View style={styles.tableRowLast}>
-                <Text style={styles.tableCellLabel}>Balance Due (7 days before event)</Text>
+                <Text style={styles.tableCellLabel}>
+                  Balance Due ({formatBalanceDueDate(inquiry.eventDate)})
+                </Text>
                 <Text style={styles.tableCellValue}>
                   ${balance.toLocaleString()}
                 </Text>
               </View>
+            </View>
+
+            <View style={styles.payBox}>
+              <Text style={styles.payBoxTitle}>Ready to secure your date?</Text>
+              <Link
+                src={`${SITE_URL}/api/checkout/${inquiry.id}`}
+                style={styles.payButton}
+              >
+                <Text style={styles.payButtonText}>
+                  Pay Deposit Now — ${deposit.toLocaleString()}
+                </Text>
+              </Link>
+              <Text style={styles.paySubtext}>
+                Secure payment powered by Clover
+              </Text>
+            </View>
+
+            <View style={styles.adviceBox}>
             </View>
 
             <View style={styles.adviceBox}>
