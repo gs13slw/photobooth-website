@@ -59,7 +59,7 @@ const ADMIN_PASSWORD_KEY = "admin:password";
 /** Returns the current admin password: Redis value if set, otherwise the env var fallback. */
 export async function getAdminPassword(): Promise<string | null> {
   const stored = await redis.get<string>(ADMIN_PASSWORD_KEY);
-  if (stored) return stored;
+  if (stored !== null && stored !== undefined) return String(stored);
   return process.env.ADMIN_PASSWORD || null;
 }
 
