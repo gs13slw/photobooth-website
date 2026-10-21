@@ -12,8 +12,8 @@ const QUICK_LINKS = [
 
 // Add your real profile URLs here when ready.
 const SOCIALS = [
-  { label: "Instagram", href: "#", icon: Instagram },
-  { label: "Facebook", href: "#", icon: Facebook },
+  { label: "Instagram", href: "https://www.instagram.com/hillhazel1154/", icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61589569035225", icon: Facebook },
 ];
 
 export default function Footer() {
@@ -46,6 +46,8 @@ export default function Footer() {
                   <a
                     key={s.label}
                     href={s.href}
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={s.label}
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/12 text-muted transition-all hover:border-flash/40 hover:text-flash-soft"
                   >
